@@ -25,14 +25,10 @@ class TacksController < ApplicationController
   # POST /tacks.json
   def create
     @tack = Tack.new(tack_params)
-
-    respond_to do |format|
       if @tack.save
-        format.html { redirect_to @tack, notice: 'Tack was successfully created.' }
-        format.json { render :show, status: :created, location: @tack }
+        redirect_to @tack, notice: 'Tack was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @tack.errors, status: :unprocessable_entity }
+        render action: 'new'    
       end
     end
   end
@@ -42,11 +38,9 @@ class TacksController < ApplicationController
   def update
     respond_to do |format|
       if @tack.update(tack_params)
-        format.html { redirect_to @tack, notice: 'Tack was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tack }
+        redirect_to @tack, notice: 'Tack was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @tack.errors, status: :unprocessable_entity }
+        render action: 'edit'   
       end
     end
   end
@@ -55,9 +49,7 @@ class TacksController < ApplicationController
   # DELETE /tacks/1.json
   def destroy
     @tack.destroy
-    respond_to do |format|
-      format.html { redirect_to tacks_url, notice: 'Tack was successfully destroyed.' }
-      format.json { head :no_content }
+    redirect_to tacks_url
     end
   end
 
