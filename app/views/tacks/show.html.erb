@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <%= image_tag @tack.image.url(:medium) %>
   <strong>Description:</strong>
   <%= @tack.description %>
 </p>
 
-<%= link_to 'Edit', edit_tack_path(@tack) %> |
+<% if @tack.user == current_user %>
+	<%= link_to 'Edit', edit_tack_path(@tack) %>
+<% end %>
 <%= link_to 'Back', tacks_path %>

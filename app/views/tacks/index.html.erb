@@ -1,11 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Tacks</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
+      <th>Images</th>
       <th>Description</th>
+      <th>User</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,10 +13,14 @@
   <tbody>
     <% @tacks.each do |tack| %>
       <tr>
+        <td><%= image_tag tack.image.url(:medium) %></td>
         <td><%= tack.description %></td>
+        <td><%= tack.user.email if tack.user %></td>
         <td><%= link_to 'Show', tack %></td>
-        <td><%= link_to 'Edit', edit_tack_path(tack) %></td>
-        <td><%= link_to 'Destroy', tack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if tack.user == current_user %>
+          <td><%= link_to 'Edit', edit_tack_path(tack) %></td>
+          <td><%= link_to 'Destroy', tack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +28,6 @@
 
 <br>
 
-<%= link_to 'New Tack', new_tack_path %>
+<% if user_signed_in? %>
+  <%= link_to 'New Tack', new_tack_path %>
+<% end %>

@@ -1,30 +1,23 @@
 class TacksController < ApplicationController
   before_action :set_tack, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
-  # GET /tacks
-  # GET /tacks.json
   def index
     @tacks = Tack.all
   end
 
-  # GET /tacks/1
-  # GET /tacks/1.json
   def show
   end
 
-  # GET /tacks/new
   def new
-    @tack = Tack.new
+    @tack = current_user.tacks.build
   end
 
-  # GET /tacks/1/edit
   def edit
   end
 
-  # POST /tacks
-  # POST /tacks.json
   def create
-    @tack = Tack.new(tack_params)
+    @tack = current_user.tacks.build(tack_params)
       if @tack.save
         redirect_to @tack, notice: 'Tack was successfully created.'
       else
@@ -33,8 +26,6 @@ class TacksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tacks/1
-  # PATCH/PUT /tacks/1.json
   def update
     respond_to do |format|
       if @tack.update(tack_params)
@@ -45,22 +36,22 @@ class TacksController < ApplicationController
     end
   end
 
-  # DELETE /tacks/1
-  # DELETE /tacks/1.json
   def destroy
     @tack.destroy
     redirect_to tacks_url
-    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tack
-      @tack = Tack.find(params[:id])
+      @tack = Tack.find_by(id: params[:id])
     end
 
+    def correct_user
+      @tack = current_user.tacks.find_by(id: params[:id])
+      redirect_to tacks_path, notice: "Not authorized to edit this pin."
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def tack_params
-      params.require(:tack).permit(:description)
+      params.require(:tack).permit(:description, :image)
     end
-end
