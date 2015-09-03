@@ -1,12 +1,18 @@
-<p id="notice"><%= notice %></p>
+<%= link_to "Back", tacks_path %>
 
-<p>
-  <%= image_tag @tack.image.url %>
-  <strong>Description:</strong>
-  <%= @tack.description %>
-</p>
+<div class="row">
+	<div class="col-md-offset-2 col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading center">
+  				<%= image_tag @tack.image.url %>
+  			</div>
+  			<div class="panel-body">
+  			<p><%= @tack.description %></p>
+			<p><strong><%= @task.user.email if @task.user %></strong></p>
 
-<% if @tack.user == current_user %>
-	<%= link_to 'Edit', edit_tack_path(@tack) %>
-<% end %>
-<%= link_to 'Back', tacks_path %>
+			<% if @tack.user == current_user %>
+				<%= link_to 'Edit', edit_tack_path(@tack) %>
+			<% end %>
+		</div>
+	</div>
+</div>

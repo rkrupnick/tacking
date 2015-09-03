@@ -30,8 +30,7 @@ class TacksController < ApplicationController
     respond_to do |format|
       if @tack.update(tack_params)
         redirect_to @tack, notice: 'Tack was successfully updated.'
-      else
-        render action: 'edit'   
+      else        render action: 'edit'   
       end
     end
   end
