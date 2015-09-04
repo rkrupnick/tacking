@@ -14,6 +14,8 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk', '< 2.0'
 gem 'masonry-rails'
 gem 'jquery-turbolinks'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'byebug'

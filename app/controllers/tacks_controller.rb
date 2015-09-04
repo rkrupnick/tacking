@@ -3,7 +3,7 @@ class TacksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @tacks = Tack.all.order("created_at DESC")
+    @tacks = Tack.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 8)
   end
 
   def show
