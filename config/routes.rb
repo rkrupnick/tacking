@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :tacks
   devise_for :users
-  root 'pages#home'
+  root 'tacks#index'
   get 'about' => 'pages#about'
 end

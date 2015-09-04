@@ -3,7 +3,7 @@ class TacksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @tacks = Tack.all
+    @tacks = Tack.all.order("created_at DESC")
   end
 
   def show

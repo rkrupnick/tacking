@@ -1,3 +1,4 @@
+<%= render 'pages/home' unless user_signed_in? %>
 <div id="tacks" class="transitions-enabled">
     <% @tacks.each do |tack| %>
         <div class="box panel panel-default">
@@ -7,8 +8,9 @@
             <%= tack.user.email if tack.user %>
             <%= link_to 'Show', tack_path(tack) %>
             <% if tack.user == current_user %>
-              <%= link_to 'Edit', edit_tack_path(tack) %>
-              <%= link_to 'Destroy', tack, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to edit_tack_path(tack) do %>
+                <span class="glyphicon glyphicon-edit"></span> Edit <% end %>
+              <%= link_to tack, method: :delete, data: { confirm: 'Are you sure?' } do %><span class="glyphicon glyphicon-trash"></span><% end %>
           <% end %>
       </div>
       </div>

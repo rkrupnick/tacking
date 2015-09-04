@@ -13,6 +13,7 @@ gem 'devise'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk', '< 2.0'
 gem 'masonry-rails'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'byebug'

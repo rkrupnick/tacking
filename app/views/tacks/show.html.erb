@@ -8,10 +8,12 @@
   			</div>
   			<div class="panel-body">
   			<p><%= @tack.description %></p>
-			<p><strong><%= @task.user.email if @task.user %></strong></p>
+			<p><strong><%= @tack.user.email if @tack.user %></strong></p>
 
 			<% if @tack.user == current_user %>
-				<%= link_to 'Edit', edit_tack_path(@tack) %>
+				<%= link_to edit_tack_path(@tack) do %>
+					<span class="glyphicon glyphicon-edit"> </span> Edit
+				<% end %>
 			<% end %>
 		</div>
 	</div>
