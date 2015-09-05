@@ -5,7 +5,7 @@
           <%= link_to image_tag(tack.image.url(:medium)), tack %>
           <div class="panel-body">
             <%= tack.description %>
-            <%= tack.user.email if tack.user %>
+            <%= tack.user.name if tack.user %>
             <%= link_to 'Show', tack_path(tack) %>
             <% if tack.user == current_user %>
               <%= link_to edit_tack_path(tack) do %>
